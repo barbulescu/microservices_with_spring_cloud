@@ -1,4 +1,4 @@
-package com.barbulescu.spring_cloud.translation
+package com.barbulescu.spring_cloud.unmanaged
 
 import org.springframework.cloud.sleuth.http.HttpRequestParser
 import org.springframework.cloud.sleuth.instrument.web.HttpServerRequestParser

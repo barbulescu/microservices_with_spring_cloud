@@ -1,4 +1,4 @@
-package com.barbulescu.spring_cloud.translation
+package com.barbulescu.spring_cloud.unmanaged
 
 import org.slf4j.LoggerFactory
 import org.springframework.web.bind.annotation.GetMapping
@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestHeader
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-class TranslationController {
+class TranslationController(private val checker: Checker) {
     private val logger = LoggerFactory.getLogger(javaClass)
 
     @GetMapping("/translate/{word}/{language}")
@@ -16,7 +16,7 @@ class TranslationController {
         @PathVariable language: Language,
         @RequestHeader("special-key") specialKey: String
     ): Translation {
-        logger.info("Called with key $specialKey")
+        logger.info("Called with key $specialKey ${checker.check()}")
         return when (word) {
             "hello" -> when (language) {
                 Language.DE -> Translation("hallo")

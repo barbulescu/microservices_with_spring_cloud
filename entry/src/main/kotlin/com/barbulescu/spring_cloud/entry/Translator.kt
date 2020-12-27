@@ -1,7 +1,6 @@
 package com.barbulescu.spring_cloud.entry
 
 import org.springframework.boot.web.client.RestTemplateBuilder
-import org.springframework.http.converter.StringHttpMessageConverter
 import org.springframework.stereotype.Component
 
 @Component

@@ -1,4 +1,4 @@
-package com.barbulescu.spring_cloud.entry
+package com.barbulescu.spring_cloud.translation
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
@@ -6,8 +6,8 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc
 
 @SpringBootApplication
 @EnableWebMvc
-class EntryApplication
+class TranslationApplication
 
 fun main(args: Array<String>) {
-	runApplication<EntryApplication>(*args)
+	runApplication<TranslationApplication>(*args)
 }

@@ -5,7 +5,6 @@ import org.springframework.boot.runApplication
 import org.springframework.web.servlet.config.annotation.EnableWebMvc
 
 @SpringBootApplication
-@EnableWebMvc
 class EntryApplication
 
 fun main(args: Array<String>) {

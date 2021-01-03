@@ -2,6 +2,7 @@ package com.barbulescu.spring_cloud.entry
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
+import org.springframework.cloud.openfeign.EnableFeignClients
 import org.springframework.cloud.sleuth.http.HttpRequestParser
 import org.springframework.cloud.sleuth.instrument.web.HttpServerRequestParser
 import org.springframework.context.annotation.Bean
@@ -20,6 +21,7 @@ fun main(args: Array<String>) {
 @Configuration
 @EnableJms
 @EnableWebMvc
+@EnableFeignClients
 class MainConfig {
 
     @Bean(name = [HttpServerRequestParser.NAME])

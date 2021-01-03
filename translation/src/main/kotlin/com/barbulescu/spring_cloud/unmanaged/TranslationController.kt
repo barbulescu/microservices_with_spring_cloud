@@ -1,6 +1,8 @@
 package com.barbulescu.spring_cloud.unmanaged
 
 import org.slf4j.LoggerFactory
+import org.springframework.boot.web.client.RestTemplateBuilder
+import org.springframework.stereotype.Component
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestHeader
@@ -25,6 +27,17 @@ class TranslationController(private val checker: Checker) {
             else -> Translation("unsupported")
         }
     }
+}
+
+@Component
+class Checker(restTemplateBuilder: RestTemplateBuilder) {
+
+    private val restTemplate = restTemplateBuilder
+        .rootUri("http://localhost:8082")
+        .build()
+
+    fun check(): Boolean =
+        restTemplate.getForEntity("/check", Boolean::class.java).body ?: false
 }
 
 enum class Language {

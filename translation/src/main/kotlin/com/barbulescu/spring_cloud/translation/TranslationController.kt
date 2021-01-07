@@ -1,4 +1,4 @@
-package com.barbulescu.spring_cloud.unmanaged
+package com.barbulescu.spring_cloud.translation
 
 import org.slf4j.LoggerFactory
 import org.springframework.boot.web.client.RestTemplateBuilder

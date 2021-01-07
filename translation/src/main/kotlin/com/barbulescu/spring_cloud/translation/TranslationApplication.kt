@@ -1,4 +1,4 @@
-package com.barbulescu.spring_cloud.unmanaged
+package com.barbulescu.spring_cloud.translation
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication

@@ -16,11 +16,20 @@ class HelloMQApplication(val jmsTemplate: JmsTemplate, val processor: SpecialPro
 
     @JmsListener(destination = "hello-request")
     fun sayHello(name: String) {
+        s(name, "hello-response")
+    }
+
+    @JmsListener(destination = "hello-request2")
+    fun sayHello2(name: String) {
+        s(name, "hello-response2")
+    }
+
+    private fun s(name: String, queue:String) {
         logger.info("Saying: $name")
 
         processor.processSomething()
 
-        jmsTemplate.send("hello-response") {
+        jmsTemplate.send(queue) {
             it.createTextMessage("Hello $name!")
         }
     }

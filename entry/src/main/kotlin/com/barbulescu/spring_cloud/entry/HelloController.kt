@@ -6,25 +6,27 @@ import org.springframework.web.bind.annotation.*
 
 
 @RestController
-class HelloController(private val translator: Translator, private val jmsClient: JmsClient) {
+class HelloController(val translator: Translator, val jmsClient: JmsClient) {
     private val logger = LoggerFactory.getLogger(javaClass)
 
     @GetMapping("/hello/{name}")
-    fun sayHello(@PathVariable name: String, @RequestHeader("special-key") specialKey: String): String {
+    fun sayHello(@PathVariable name: String, @RequestHeader("input-key") specialKey: String): String {
         logger.info("Saying hello for $name with key $specialKey")
-        return "${sayHello(Language.DE).capitalize()} $name!"
+        val helloResponse = sayHello(Language.DE)
+        val capitalizedResponse = helloResponse.capitalize()
+        return "$capitalizedResponse $name!"
     }
 
     private fun sayHello(language: Language): String =
         translator.translate(language)?.value ?: "Unknown translation"
 
     @GetMapping("/hello_jms/{name}")
-    fun sayHelloJms(@PathVariable name: String, @RequestHeader("special-key") specialKey: String): String {
+    fun sayHelloJms(@PathVariable name: String, @RequestHeader("input-key") specialKey: String): String {
         return jmsClient.sayHello(name, specialKey)
     }
 
     @GetMapping("/hello_jms_listener/{name}")
-    fun sayHelloJmsWithListener(@PathVariable name: String, @RequestHeader("special-key") specialKey: String): String {
+    fun sayHelloJmsWithListener(@PathVariable name: String, @RequestHeader("input-key") specialKey: String): String {
         return jmsClient.sayHelloWithListener(name, specialKey)
     }
 }

@@ -1,6 +1,7 @@
 package com.barbulescu.spring_cloud.entry
 
 import org.slf4j.LoggerFactory
+import org.springframework.cloud.sleuth.Tracer
 import org.springframework.jms.annotation.JmsListener
 import org.springframework.jms.core.JmsTemplate
 import org.springframework.jms.support.converter.SimpleMessageConverter
@@ -10,7 +11,7 @@ import java.util.concurrent.TimeUnit.SECONDS
 import javax.jms.Message
 
 @Component
-class JmsClient(private val jmsTemplate: JmsTemplate) {
+class JmsClient(val jmsTemplate: JmsTemplate, val tracer: Tracer) {
     private val logger = LoggerFactory.getLogger(javaClass)
     private val simpleMessageConverter = SimpleMessageConverter()
     private val exchanger = Exchanger<String>()

@@ -14,7 +14,6 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc
 import javax.servlet.FilterChain
 import javax.servlet.ServletRequest
 import javax.servlet.ServletResponse
-import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
 
 @SpringBootApplication
@@ -36,12 +35,7 @@ class MyFilter(val tracer: Tracer) : GenericFilterBean() {
 
     override fun doFilter(request: ServletRequest?, response: ServletResponse?, chain: FilterChain?) {
         val res = response as HttpServletResponse
-        val req = request as HttpServletRequest
-        val currentSpan = tracer.currentSpan()
-        val inputKey = req.getHeader("input-key")
-        currentSpan?.tag("input-key", inputKey)
-        res.setHeader("Trace-Id", currentSpan?.context()?.traceId())
-        res.setHeader("input-key", inputKey)
+        res.setHeader("Trace-Id", tracer.currentSpan()?.context()?.traceId())
         chain?.doFilter(request, response)
     }
 }

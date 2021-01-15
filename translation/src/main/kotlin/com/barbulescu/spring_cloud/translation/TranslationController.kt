@@ -1,6 +1,6 @@
 package com.barbulescu.spring_cloud.translation
 
-import org.slf4j.LoggerFactory
+import org.apache.logging.log4j.LogManager
 import org.springframework.boot.web.client.RestTemplateBuilder
 import org.springframework.stereotype.Component
 import org.springframework.web.bind.annotation.GetMapping
@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 class TranslationController(val checker: Checker) {
-    private val logger = LoggerFactory.getLogger(javaClass)
+    private val logger = LogManager.getLogger(javaClass)
 
     @GetMapping("/translate/{word}/{language}")
     fun sayHello(@PathVariable word: String, @PathVariable language: Language): Translation {

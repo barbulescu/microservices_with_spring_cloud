@@ -18,7 +18,12 @@ repositories {
 
 extra["springCloudVersion"] = "2020.0.0"
 
+configurations.all {
+    exclude(group = "org.springframework.boot", module = "spring-boot-starter-logging")
+}
+
 dependencies {
+	implementation("org.springframework.boot:spring-boot-starter-log4j2")
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("org.springframework.boot:spring-boot-starter-artemis")
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")

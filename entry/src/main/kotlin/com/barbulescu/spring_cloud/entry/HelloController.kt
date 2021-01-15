@@ -1,13 +1,13 @@
 package com.barbulescu.spring_cloud.entry
 
-import org.slf4j.LoggerFactory
+import org.apache.logging.log4j.LogManager
 import org.springframework.cloud.openfeign.FeignClient
 import org.springframework.web.bind.annotation.*
 
 
 @RestController
 class HelloController(val translator: Translator, val jmsClient: JmsClient) {
-    private val logger = LoggerFactory.getLogger(javaClass)
+    private val logger = LogManager.getLogger(javaClass)
 
     @GetMapping("/hello/{name}")
     fun sayHello(@PathVariable name: String, @RequestHeader("input-key") specialKey: String): String {
